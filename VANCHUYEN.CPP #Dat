@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+#define for(i,a,b); for (int i = a; i <= b; i++)
+using namespace std;
+fstream fi,fo;
+int n,m;
+long long s;
+struct kxe {int nguyenlieu; int stt;};
+struct khang{int dai; int stt;};
+struct khang duong[200];
+struct kxe xe[201];
+int dd [200];
+typedef struct khang kieu1;
+typedef struct kxe kieu2;
+bool waylon(kieu1 a , kieu1 b ) {return a.dai > b.dai;}
+bool waynho(kieu2  a, kieu2 b ) {return a.nguyenlieu < b.nguyenlieu;}
+int main()
+{
+    fi.open("VANCHUYEN.INP", ios::in);
+    fo.open("VANCHUYEN.OUT", ios::out);
+    fi >> n >> m ;
+    for(j,1,n){fi >> duong[j].dai; duong[j].stt = j ;}
+    for(j,1,m){fi >> xe[j].nguyenlieu; xe[j].stt = j ;}
+    sort(duong +1 ,duong +n+1, waylon);
+    sort(xe+1,xe+m+1,waynho);
+    for (j,1,m) {dd[duong[j].stt] = j;}
+    for(j,1,n)
+    {
+        int temp = duong[dd[j]].dai * xe[dd[j]].nguyenlieu ;
+        s += temp;
+      fo << j << " " << xe[dd[j]].stt<< " " << temp << endl;
+    }
+    fo << s;
+    fo.close();
+}
